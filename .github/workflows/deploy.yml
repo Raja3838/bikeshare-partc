@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    env:
+      IMAGE_NAME: your_image_name
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
