@@ -8,24 +8,23 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
-    env:
-      CONTAINER_NAME: your_container_name
-      IMAGE_NAME: your_image_name
-      PORT_NUMBER: 80
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Display container name
-        run: |
-          echo "Container Name: $CONTAINER_NAME"
-
       - name: Stop and remove old container
         run: |
-          docker stop $CONTAINER_NAME || true
-          docker rm $CONTAINER_NAME || true
+          CONTAINER_NAME="your_container_name"
+          OLD_CONTAINER=$(docker ps -aq --filter "name=$CONTAINER_NAME")
+          if [ -n "$OLD_CONTAINER" ]; then
+            docker stop $OLD_CONTAINER
+            docker rm $OLD_CONTAINER
+          fi
 
       - name: Build and run new container
         run: |
+          IMAGE_NAME="your_image_name"
+          CONTAINER_NAME="your_container_name"
+          PORT_NUMBER=80
           docker build -t $IMAGE_NAME .
           docker run -d --name $CONTAINER_NAME -p $PORT_NUMBER:80 $IMAGE_NAME
