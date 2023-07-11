@@ -1,0 +1,27 @@
+name: Install bikeshare_model
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install package
+        run: |
+          pip install bikeshare_model==0.0.1
+
+      - name: Verify installation
+        run: |
+          python -c "import bikeshare_model; print(bikeshare_model.__version__)"
