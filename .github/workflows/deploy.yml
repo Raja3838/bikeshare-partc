@@ -20,8 +20,9 @@ jobs:
           
       - name: Build and run new container
         run: |
-          docker build -t $IMAGE_NAME -f bikeshare-partc/Dockerfile .
+          docker build -t $IMAGE_NAME .
           docker run -d --name $CONTAINER_NAME -p 80:80 $IMAGE_NAME
-          working-directory: .
+        working-directory: .
+
 
 
