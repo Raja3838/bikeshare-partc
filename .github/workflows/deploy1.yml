@@ -22,6 +22,6 @@ jobs:
 
       - name: Build and run new container
         run: |
-          docker build -t $IMAGE_NAME .
+          docker build -t $IMAGE_NAME -f path/to/Dockerfile .
           docker run -d --name $CONTAINER_NAME -p 8001:80 $IMAGE_NAME
         working-directory: ./bikeshare_project
