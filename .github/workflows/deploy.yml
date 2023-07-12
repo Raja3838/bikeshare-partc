@@ -9,14 +9,14 @@ jobs:
   deploy:
     runs-on: self-hosted
     env:
-      IMAGE_NAME: your_image_name
+      IMAGE_NAME: bikeshare-api:v1.0
+      CONTAINER_NAME: bikeshare-container
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Stop and remove old container
         run: |
-          CONTAINER_NAME="your_container_name"
           docker stop $CONTAINER_NAME || true
           docker rm $CONTAINER_NAME || true
 
